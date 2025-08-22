@@ -731,11 +731,11 @@ td {
   .hdr-r-abs .btn {
     min-width: 60px;
     padding: 8px 6px;
-    font-size: 14px;
+    font-size: 12px;
   }
   .hdr-c {
     text-align: center;
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin-top: 6px;
   }
   #menuBtn {
