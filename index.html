@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Changed to min-height */
+            margin: 0;
+            padding: 20px; /* Added padding */
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px; /* Set a max-width */
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px; /* Added margin */
+        }
+        .quiz-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .quiz-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quiz-item h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #555;
+            text-align: left;
+        }
+        .start-btn {
+            display: inline-block;
+            padding: 10px 20px; /* Adjusted padding */
+            font-size: 16px; /* Adjusted font-size */
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap; /* Prevents button text from wrapping */
+        }
+        .start-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Choose a Quiz</h1>
+        <ul class="quiz-list">
+            <li class="quiz-item">
+                <h2>HTML Basics Quiz</h2>
+                <a href="quiz1.html" class="start-btn">Start Quiz</a>
+            </li>
+            
+            <li class="quiz-item">
+                <h2>CSS Basics Quiz</h2>
+                <a href="quiz2.html" class="start-btn">Start Quiz</a>
+            </li>
+
+            </ul>
+    </div>
+
+</body>
+</html>
