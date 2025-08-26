@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Direction Sense Quiz</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      // --- QUIZ CONFIGURATION ---
+      const quizConfig = {
+        shuffle: false,
+      };
+
+      // --- QUIZ DATA ---
+      const quizData = [
+        {
+          comp: "<p>Vijaya starts walking north from point A. After walking 10km, she takes a right turn and covers 7km to reach point B. Then she takes a right turn and covers 5km. Thereafter she moves west and walks 10km, then takes a left turn and walks 7km to reach point C. Finally, she turns left and walks 10km to reach point D.</p>",
+          question: "<b>What is the shortest distance between point D and point B?</b>",
+          options: ["10km", "7km", "12km", "13km", "5km"],
+          correct_option_id: 3,
+        },
+        {
+          comp: "<p>Vijaya starts walking north from point A. After walking 10km, she takes a right turn and covers 7km to reach point B. Then she takes a right turn and covers 5km. Thereafter she moves west and walks 10km, then takes a left turn and walks 7km to reach point C. Finally, she turns left and walks 10km to reach point D.</p>",
+          question: "<b>In which direction is point A with respect to point C?</b>",
+          options: ["North", "North-East", "South-East", "East", "North-West"],
+          correct_option_id: 1,
+        },
+        {
+          comp: "<p>Vijaya starts walking north from point A. After walking 10km, she takes a right turn and covers 7km to reach point B. Then she takes a right turn and covers 5km. Thereafter she moves west and walks 10km, then takes a left turn and walks 7km to reach point C. Finally, she turns left and walks 10km to reach point D.</p>",
+          question: "<b>What is the shortest distance between the starting point A and final point D?</b>",
+          options: ["√149 km", "√153 km", "12 km", "√151 km", "√145 km"],
+          correct_option_id: 0,
+        },
+        {
+          comp: "<p>Eight persons A, B, C, D, E, F, G and H are sitting at some distance. A is 13m north of C. G is 6m east of F, who is 11m north of E. D is 8m west of E. B is 8m east of C. G is 25m north of H. C is 10m south of D.</p>",
+          question: "<b>G is in which direction with respect to A?</b>",
+          options: ["South-West", "North-East", "West", "East", "South-East"],
+          correct_option_id: 1,
+        },
+        {
+          comp: "<p>Eight persons A, B, C, D, E, F, G and H are sitting at some distance. A is 13m north of C. G is 6m east of F, who is 11m north of E. D is 8m west of E. B is 8m east of C. G is 25m north of H. C is 10m south of D.</p>",
+          question: "<b>What is the shortest distance between F and H?</b>",
+          options: ["√61m", "√361m", "√401m", "√421m", "20m"],
+          correct_option_id: 2,
+        },
+        {
+          comp: "<p>Eight persons A, B, C, D, E, F, G and H are sitting at some distance. A is 13m north of C. G is 6m east of F, who is 11m north of E. D is 8m west of E. B is 8m east of C. G is 25m north of H. C is 10m south of D.</p>",
+          question: "<b>What is the position of B with respect to E?</b>",
+          options: ["South", "North", "South-West", "North-West", "East"],
+          correct_option_id: 2,
+        },
+        {
+          comp: "<p>There are nine Houses: A, B, C, D, E, F, G, H and I. D is 2m east of B. A is 1m north of B and H is 2m south of A. F is 1m west of H while E is 3m east of F and C is 2m north of E. I is situated just in the middle of B and D while G is just in the middle of H and E.</p>",
+          question: "<b>Point I is in which direction and how far from point G?</b>",
+          options: ["North, 2m", "South, 1m", "East, 1m", "West, 1m", "North, 1m"],
+          correct_option_id: 4,
+        },
+        {
+          comp: "<p>There are nine Houses: A, B, C, D, E, F, G, H and I. D is 2m east of B. A is 1m north of B and H is 2m south of A. F is 1m west of H while E is 3m east of F and C is 2m north of E. I is situated just in the middle of B and D while G is just in the middle of H and E.</p>",
+          question: "<b>What is the shortest distance between House A and House C?</b>",
+          options: ["√2 m", "√3 m", "2 m", "√5 m", "3 m"],
+          correct_option_id: 3,
+        },
+        {
+          comp: "<p>There are nine Houses: A, B, C, D, E, F, G, H and I. D is 2m east of B. A is 1m north of B and H is 2m south of A. F is 1m west of H while E is 3m east of F and C is 2m north of E. I is situated just in the middle of B and D while G is just in the middle of H and E.</p>",
+          question: "<b>Which house is to the south-west of C?</b>",
+          options: ["A", "B", "H", "F", "I"],
+          correct_option_id: 1,
+        },
+        {
+          comp: "<p>Point A is 5m south of point L. Point H is 6m east of point A. Point J is 5m north of point H. Point O is 10m west of point J. Point N is 5m north-east of point O and north of point L. Point K is 10m west of point L.</p>",
+          question: "<b>What is the distance between point N and point A?</b>",
+          options: ["3m", "8m", "4m", "5m", "None of these"],
+          correct_option_id: 3,
+        },
+        {
+          comp: "<p>Point A is 5m south of point L. Point H is 6m east of point A. Point J is 5m north of point H. Point O is 10m west of point J. Point N is 5m north-east of point O and north of point L. Point K is 10m west of point L.</p>",
+          question: "<b>In which direction is point K with respect to point H?</b>",
+          options: ["North-East", "South-East", "North", "South-West", "North-West"],
+          correct_option_id: 4,
+        },
+        {
+          comp: "<p>Point A is 5m south of point L. Point H is 6m east of point A. Point J is 5m north of point H. Point O is 10m west of point J. Point N is 5m north-east of point O and north of point L. Point K is 10m west of point L.</p>",
+          question: "<b>What is the shortest distance between point K and point J?</b>",
+          options: ["16m", "18m", "20m", "22m", "24m"],
+          correct_option_id: 2,
+        },
+        {
+          comp: "<p>Rahul and Vivek start from point Z. Vivek moves 4m north to point A, then 5m right to point B, then 4m right to point C, then 7m left to point D, then 5m right to point E. Rahul moves 5m west from Z, then 3m left, then 3m left, then 2m right to reach point Y.</p>",
+          question: "<b>What is the shortest distance between point Y and point E?</b>",
+          options: ["13m", "14m", "15m", "17m", "16m"],
+          correct_option_id: 3,
+        },
+        {
+          comp: "<p>Rahul and Vivek start from point Z. Vivek moves 4m north to point A, then 5m right to point B, then 4m right to point C, then 7m left to point D, then 5m right to point E. Rahul moves 5m west from Z, then 3m left, then 3m left, then 2m right to reach point Y.</p>",
+          question: "<b>In which direction is Rahul's final position (Y) with respect to Vivek's final position (E)?</b>",
+          options: ["North-East", "South-East", "North-West", "South-West", "South"],
+          correct_option_id: 3,
+        },
+        {
+          comp: "<p>Rahul and Vivek start from point Z. Vivek moves 4m north to point A, then 5m right to point B, then 4m right to point C, then 7m left to point D, then 5m right to point E. Rahul moves 5m west from Z, then 3m left, then 3m left, then 2m right to reach point Y.</p>",
+          question: "<b>What is the distance between Rahul's starting point (west of Z) and Vivek's final position (E)?</b>",
+          options: ["20m", "21m", "22m", "23m", "24m"],
+          correct_option_id: 1,
+        },
+        {
+          comp: "<p>5 cars A, B, C, D and E are parked in a straight line. The distance between each adjacent car is a successive multiple of 3. Car A is to the immediate left of car B. The distance between A and B is a multiple of 11 (33). The distance between B and C is 75m, and only 1 car is between them. The distance between D and E is a multiple of both 9 and 11 (99). Car D is to the left of E.</p>",
+          question: "<b>What is the distance between A and E?</b>",
+          options: ["99m", "66m", "69m", "54m", "None of these"],
+          correct_option_id: 2,
+        },
+        {
+          comp: "<p>5 cars A, B, C, D and E are parked in a straight line. The distance between each adjacent car is a successive multiple of 3. Car A is to the immediate left of car B. The distance between A and B is a multiple of 11 (33). The distance between B and C is 75m, and only 1 car is between them. The distance between D and E is a multiple of both 9 and 11 (99). Car D is to the left of E.</p>",
+          question: "<b>What is the total distance between the first and last car in the row?</b>",
+          options: ["150m", "180m", "210m", "240m", "270m"],
+          correct_option_id: 3,
+        },
+        {
+          comp: "<p>Vimal and Tarun start from point A. Vimal walks 5m east to B, then 4m left to C, then 3m right to D. Tarun walks 5m north from A to J, then 4m right to K, then 7m right to L, then 4m left to M.</p>",
+          question: "<b>What is the shortest distance between point D and point M?</b>",
+          options: ["5m", "6m", "8m", "4m", "None of these"],
+          correct_option_id: 0,
+        },
+        {
+          comp: "<p>Vimal and Tarun start from point A. Vimal walks 5m east to B, then 4m left to C, then 3m right to D. Tarun walks 5m north from A to J, then 4m right to K, then 7m right to L, then 4m left to M.</p>",
+          question: "<b>In which direction is Tarun's final position (M) with respect to Vimal's final position (D)?</b>",
+          options: ["North-East", "South-East", "North-West", "South-West", "South"],
+          correct_option_id: 1,
+        },
+        {
+          comp: "<p>Vimal and Tarun start from point A. Vimal walks 5m east to B, then 4m left to C, then 3m right to D. Tarun walks 5m north from A to J, then 4m right to K, then 7m right to L, then 4m left to M.</p>",
+          question: "<b>What is the total distance Tarun walked?</b>",
+          options: ["18m", "20m", "22m", "24m", "26m"],
+          correct_option_id: 1,
+        },
+      ];
+    </script>
+  </head>
+  <body>
+    <div class="welcome-screen" id="welcomeScreen">
+      <h1 class="welcome-title">Direction Sense Quiz</h1>
+      <div class="welcome-details">
+        <div class="welcome-detail">
+          <span class="welcome-detail-label">Total Questions:</span>
+          <span class="welcome-detail-value">20</span>
+        </div>
+        <div class="welcome-detail">
+          <span class="welcome-detail-label">Time Limit:</span>
+          <span class="welcome-detail-value">Unlimited</span>
+        </div>
+        <div class="welcome-detail">
+          <span class="welcome-detail-label">Marking:</span>
+          <span class="welcome-detail-value">+1 / -0.25</span>
+        </div>
+      </div>
+      <div class="welcome-instructions">
+        <h3>Instructions</h3>
+        <ul>
+          <li>Read each question carefully before answering.</li>
+          <li>You can mark questions for review and come back later.</li>
+          <li>Negative marking applies for wrong answers.</li>
+        </ul>
+      </div>
+      <button class="welcome-button" id="startTestBtn">
+        <i class="fas fa-play"></i> Start Test
+      </button>
+    </div>
+
+    <div id="mainTestInterface" style="display: none">
+      <div class="hdr">
+        <div class="hdr-l">
+          <div class="q-info" id="qInfo"></div>
+          <div class="timer-qns" id="qnsTimer">00:00</div>
+          <div class="timer" id="timer">00:00</div>
+        </div>
+        <div class="hdr-c">Pro Supriyo</div>
+        <div class="hdr-r">
+          <button class="btn btn-o btn-sm" id="menuBtn">
+            <i class="fas fa-th"></i>
+          </button>
+          <button class="btn btn-o btn-sm" id="pauseBtn">
+            <i class="fas fa-pause"></i> Pause
+          </button>
+          <button
+            class="btn btn-p btn-sm"
+            id="restartBtn"
+            style="display: none"
+          >
+            <i class="fas fa-redo"></i> Restart Test
+          </button>
+          <button class="btn btn-p btn-sm" id="subBtn">Submit</button>
+        </div>
+      </div>
+
+      <div class="cont">
+        <div class="q-card">
+          <div id="compSec" style="display: none">
+            <div id="compCont"></div>
+          </div>
+          <div class="q-txt" id="qTxt"></div>
+          <div class="opts" id="opts"></div>
+          <div class="sol" id="sol">
+            <div class="sol-info" id="solInfo"></div>
+            <h4><i class="fas fa-lightbulb"></i> Solution</h4>
+            <div id="solCont"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button class="btn btn-o nav-btn" id="prevBtn">
+          <i class="fas fa-chevron-left"></i> Prev
+        </button>
+        <button class="btn btn-w nav-btn" id="reviewBtn">
+          <i class="fas fa-flag"></i> Review
+        </button>
+        <div class="prog">
+          <div id="progTxt"></div>
+          <div class="prog-meta">Answered: <span id="ansCnt">0</span></div>
+        </div>
+        <button class="btn btn-p nav-btn" id="nextBtn">
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="desktop-sidebar" id="desktopSidebar">
+        <h3>Questions Navigator</h3>
+        <div class="q-grid" id="desktopQGrid"></div>
+      </div>
+
+      <div class="panel" id="panel">
+        <div class="panel-hdr">
+          <h3>All Questions</h3>
+          <button class="panel-close" id="panelClose">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="q-grid" id="qGrid"></div>
+      </div>
+
+      <button class="print-btn" id="printBtn" style="display: none">
+        <i class="fas fa-print"></i>
+      </button>
+
+      <div class="modal" id="modalOver">
+        <div class="result">
+          <h2>Test Complete!</h2>
+          <div class="score" id="scoreDisp"></div>
+          <div class="stats">
+            <div class="stat c">
+              <div class="stat-val" id="corrStat"></div>
+              <div class="stat-lbl">Correct</div>
+            </div>
+            <div class="stat w">
+              <div class="stat-val" id="incStat"></div>
+              <div class="stat-lbl">Incorrect</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val" id="unaStat"></div>
+              <div class="stat-lbl">Unattempted</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val" id="timeStat"></div>
+              <div class="stat-lbl">Minutes Taken</div>
+            </div>
+          </div>
+          <div class="modal-acts">
+            <button class="btn btn-o modal-btn" id="closeModal">Close</button>
+            <button class="btn btn-p modal-btn" id="revBtn">Review</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="pausedOverlay">
+      <div>Paused<br /><span>Click anywhere to resume</span></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
